@@ -14,11 +14,17 @@ import pymongo
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+# set custom username and password with your mongodb data
+username = userName
+password = passWord
+
+mongoString = 'mongodb+srv://' + username + ':' + password+ '@causalai.p6ds6oh.mongodb.net/'
+
 app = Flask(__name__)
 CORS(app)
 
 def upload_data(data_row):
-    client = MongoClient('mongodb+srv://kumthekarishan:ifYce0zRbF4NLfPb@causalai.p6ds6oh.mongodb.net/')
+    client = MongoClient(mongoString)
 # Send a ping to confirm a successful connection
 
     db = client['agriculture_data']
@@ -31,7 +37,7 @@ def upload_data(data_row):
 
 
 def get_data():
-    client = MongoClient('mongodb+srv://kumthekarishan:ifYce0zRbF4NLfPb@causalai.p6ds6oh.mongodb.net/')
+    client = MongoClient(mongoString)
 # Send a ping to confirm a successful connection
 
     db = client['agriculture_data']
@@ -66,7 +72,7 @@ def inp():
     data = request.json
     data['index'] = max(get_data()['index'])+1
     print(data)
-    client = MongoClient('mongodb+srv://kumthekarishan:ifYce0zRbF4NLfPb@causalai.p6ds6oh.mongodb.net/')
+    client = MongoClient(mongoString)
 # Send a ping to confirm a successful connection
 
     db = client['agriculture_data']
